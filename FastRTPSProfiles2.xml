@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<profiles
+    xmlns="http://www.eprosima.com/XMLSchemas/fastRTPS_Profiles">
+  <transport_descriptors>
+    <transport_descriptor>
+      <transport_id>nonblocking_tcp_transport</transport_id>
+      <type>TCPv4</type>
+      <maxMessageSize>10000</maxMessageSize>
+      <sendBufferSize>92160</sendBufferSize>
+      <listening_ports>
+        <port>7401</port>
+      </listening_ports>
+      <wan_addr>10.42.0.135</wan_addr>
+    </transport_descriptor>
+  </transport_descriptors>
+  <participant profile_name="participant profile" is_default_profile="true">
+    <rtps>
+      <userTransports>
+        <transport_id>nonblocking_tcp_transport</transport_id>
+      </userTransports>
+      <useBuiltinTransports>false</useBuiltinTransports>
+    </rtps>
+  </participant>
+  <publisher profile_name="noblocking publisher" is_default_profile="true">
+    <qos>
+      <publishMode>
+        <kind>ASYNCHRONOUS</kind>
+      </publishMode>
+      <reliability>
+        <kind>RELIABLE</kind>
+	<!--
+        <max_blocking_time>
+          <sec>0.01</sec>
+        </max_blocking_time>
+	-->
+      </reliability>
+    </qos>
+    <historyMemoryPolicy>PREALLOCATED_WITH_REALLOC</historyMemoryPolicy>
+  </publisher>
+  <!-- default subscriber profile -->
+  <subscriber profile_name="nonblocking subscriber" is_default_profile="true">
+    <historyMemoryPolicy>PREALLOCATED_WITH_REALLOC</historyMemoryPolicy>
+  </subscriber>
+ </profiles>

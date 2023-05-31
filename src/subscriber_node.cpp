@@ -31,7 +31,8 @@ struct TestSubscriber : public rclcpp::Node
     timer_ = rclcpp::create_timer(
       this, get_clock(), rclcpp::Duration::from_seconds(1.0),
       std::bind(&TestSubscriber::timerExpired, this));
-    rclcpp::QoS qos(1);
+    //rclcpp::QoS qos(1);
+    rclcpp::SensorDataQoS qos;
     sub_ = create_subscription<StringMsg>(
       "test_string", qos,
       std::bind(&TestSubscriber::callback, this, std::placeholders::_1));

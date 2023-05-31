@@ -22,7 +22,7 @@ Point to fastrtps config file:
 ```
 cd ~/ws/src/ros2_perf_test
 export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
-export FASTRTPS_DEFAULT_PROFILES_FILE=`pwd`/SyncAsync.xml
+export FASTRTPS_DEFAULT_PROFILES_FILE=`pwd`/FastRTPSProfiles.xml
 export RMW_FASTRTPS_USE_QOS_FROM_XML=1
 export RMW_FASTRTPS_PUBLICATION_MODE=ASYNCHRONOUS
 ```
@@ -43,6 +43,18 @@ The moment the subscriber connects, the publisher rate drops:
 [INFO] [1676144439.673727937] [test_publisher]: size: 1000000 rate: 15.30 bw:  122.402 Mbits/s
 [INFO] [1676144440.740182488] [test_publisher]: size: 1000000 rate: 13.13 bw:  105.023 Mbits/s
 ```
+
+## How to achieve nonblocking publish under ROS2:
+Unfortunately this is only possible under FASTRTPS. No other DDS seems
+to offer this option.
+```
+cd src/ros2_perf_test
+export FASTRTPS_DEFAULT_PROFILES_FILE=`pwd`/FastRTPSProfiles.xml
+export RMW_FASTRTPS_USE_QOS_FROM_XML=1
+export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+```
+
+#
 ## License
 
 This software is issued under the Apache License Version 2.0.
